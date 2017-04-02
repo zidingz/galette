@@ -4,27 +4,32 @@
         <form action="{path_for name="filter-memberslist"}" method="post" id="filtre">
         <div id="listfilter">
 {if !isset($adv_filters) || !$adv_filters}
-            <label for="filter_str">{_T string="Search:"}&nbsp;</label>
-            <input type="text" name="filter_str" id="filter_str" value="{$filters->filter_str}" type="search" placeholder="{_T string="Enter a value"}"/>&nbsp;
-             {_T string="in:"}&nbsp;
-            <select name="filter_field">
-                {html_options options=$filter_field_options selected=$filters->field_filter}
-            </select>
-             {_T string="among:"}&nbsp;
-            <select name="filter_membership" onchange="form.submit()">
-                {html_options options=$filter_membership_options selected=$filters->membership_filter}
-            </select>
-            <select name="filter_account" onchange="form.submit()">
-                {html_options options=$filter_accounts_options selected=$filters->account_status_filter}
-            </select>
-            <select name="group_filter" onchange="form.submit()">
-                <option value="0">{_T string="Select a group"}</option>
-{foreach from=$filter_groups_options item=group}
-                <option value="{$group->getId()}"{if $filters->group_filter eq $group->getId()} selected="selected"{/if}>{$group->getIndentName()}</option>
-{/foreach}
-            </select>
-            <input type="submit" class="inline" value="{_T string="Filter"}"/>
-            <input type="submit" name="clear_filter" class="inline" value="{_T string="Clear filter"}"/>
+            <p class="mainsearch">
+                <label for="filter_str">{_T string="Search:"}&nbsp;</label>
+                <input type="text" name="filter_str" id="filter_str" value="{$filters->filter_str}" type="search" placeholder="{_T string="Enter a value"}"/>
+                <button type="submit" id="btnsearch" title="{_T string="Filter"}"><span>{_T string="Filter"}<span></button>
+                <button type="submit" id="btnclear" name="clear_filter" title="{_T string="Clear filter"}"><span>{_T string="Clear filter"}</span></button>
+                <span class="ui-icon ui-icon-circle-arrow-s fright"><span>{_T string="More search parameters"}</span></a>
+            </p>
+            <div class="extrasearch">
+                {_T string="in:"}&nbsp;
+                <select name="filter_field">
+                    {html_options options=$filter_field_options selected=$filters->field_filter}
+                </select>
+                {_T string="among:"}&nbsp;
+                <select name="filter_membership" onchange="form.submit()">
+                    {html_options options=$filter_membership_options selected=$filters->membership_filter}
+                </select>
+                <select name="filter_account" onchange="form.submit()">
+                    {html_options options=$filter_accounts_options selected=$filters->account_status_filter}
+                </select>
+                <select name="group_filter" onchange="form.submit()">
+                    <option value="0">{_T string="Select a group"}</option>
+    {foreach from=$filter_groups_options item=group}
+                    <option value="{$group->getId()}"{if $filters->group_filter eq $group->getId()} selected="selected"{/if}>{$group->getIndentName()}</option>
+    {/foreach}
+                </select>
+            </div>
             <div>
                 {_T string="Members that have an email address:"}
                 <input type="radio" name="email_filter" id="filter_dc_email" value="{Galette\Repository\Members::FILTER_DC_EMAIL}"{if $filters->email_filter eq constant('Galette\Repository\Members::FILTER_DC_EMAIL')} checked="checked"{/if}>

@@ -448,8 +448,8 @@ footer li {
     border-radius: 10px 10px 10px 10px;
 }
 
-#listfilter input[type="text"]{
-    padding:0;
+#listfilter p.mainsearch {
+    margin: .2em 0;
 }
 
 .selection_menu{
@@ -2560,6 +2560,39 @@ td.photo img{
         display: block;
         width: auto;
         text-align: left;
+    }
+
+    p.mainsearch label {
+        display: none;
+    }
+    p.mainsearch input[type=text] {
+        width: 65%;
+    }
+
+    #btnsearch, #btnclear {
+        height: 2em;
+        width: 3em;
+        padding-right: .5em!important;
+        background-position: 10px 50%, 50% 50%!important;
+        background-repeat: no-repeat, repeat!important;
+    }
+
+    #btnsearch {
+        background-image:url(images/icon-search.png), url("jquery-ui/images/ui-bg_glass_75_e6e6e6_1x400.png");
+    }
+    #btnsearch.ui-state-hover {
+        background-image:url(images/icon-search.png), url("jquery-ui/images/ui-bg_glass_75_ffb619_1x400.png");
+    }
+
+    #btnclear {
+        background-image:url(images/clearfilter.png), url("jquery-ui/images/ui-bg_glass_75_e6e6e6_1x400.png");
+    }
+    #btnclear.ui-state-hover {
+        background-image:url(images/clearfilter.png), url("jquery-ui/images/ui-bg_glass_75_ffb619_1x400.png");
+    }
+
+    #btnsearch > span, #btnclear > span {
+        display: none;
     }
 }
 @media screen and (max-width:767px) and (orientation: landscape) {
