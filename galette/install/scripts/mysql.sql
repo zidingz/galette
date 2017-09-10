@@ -238,7 +238,6 @@ CREATE TABLE galette_groups (
   creation_date datetime NOT NULL,
   parent_group int(10) DEFAULT NULL,
   PRIMARY KEY (id_group),
-  UNIQUE KEY `name` (group_name),
   FOREIGN KEY (parent_group) REFERENCES galette_groups (id_group)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
