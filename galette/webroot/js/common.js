@@ -212,4 +212,6 @@ $(function() {
             }
         });
     }
+
+    //$('.inputfile').hide();
 });

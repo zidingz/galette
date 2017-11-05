@@ -103,6 +103,7 @@ $app->get(
                 'self_adh'          => true,
                 'languages'         => $this->i18n->getList(),
                 'require_calendar'  => true,
+                'require_upload'    => true,
                 'autocomplete'      => true,
                 // pseudo random int
                 'time'              => time(),
@@ -832,6 +833,7 @@ $app->get(
                     'parent_tpl'        => 'page.tpl',
                     'navigate'          => $navigate,
                     'require_dialog'    => true,
+                    'require_upload'    => true,
                     'autocomplete'      => true,
                     'page_title'        => $title,
                     'member'            => $member,
