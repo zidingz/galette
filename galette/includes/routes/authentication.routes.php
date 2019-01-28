@@ -56,7 +56,7 @@ $app->get(
             // display page
             $this->view->render(
                 $response,
-                'index.tpl',
+                'index.twig',
                 array(
                     'page_title'    => _T("Login"),
                 )

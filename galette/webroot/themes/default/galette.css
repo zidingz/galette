@@ -613,14 +613,6 @@ input#btnvalid, input#btnadd, input#btncancel, input#btnsend, input#btnback {
     padding-left:2.4em!important;
 }
 
-a > i {
-    color: rgb(102, 102, 102);
-}
-
-a:hover i {
-    color: rgba(0, 0, 0, 1);
-}
-
 .use > i, button.use i {
     color: rgba(0, 128, 0, .5);
 }

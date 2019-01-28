@@ -37,7 +37,7 @@
 namespace Galette\Handlers;
 
 use Analog\Analog;
-use Slim\Views\Smarty;
+use Slim\Views\Twig;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
@@ -59,10 +59,10 @@ trait GaletteError
     /**
      * Constructor
      *
-     * @param Smarty $view                View instance
-     * @param bool   $displayErrorDetails Set to true to display full details
+     * @param Twig $view                View instance
+     * @param bool $displayErrorDetails Set to true to display full details
      */
-    public function __construct(Smarty $view, $displayErrorDetails = false)
+    public function __construct(Twig $view, $displayErrorDetails = false)
     {
         $this->view = $view;
         $this->displayErrorDetails = (bool) $displayErrorDetails;

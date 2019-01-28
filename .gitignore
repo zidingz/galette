@@ -90,3 +90,7 @@ apidocs/
 dbs/
 dist/
 .zanata-cache/
+
+#js deps
+galette/webroot/js/node_modules/
+galette/webroot/js/semantic/

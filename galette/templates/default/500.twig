@@ -1,0 +1,48 @@
+{% extends 'public_page.twig' %}
+
+{% macro render_ex(exception) %}
+    <div>
+        <h3>{#_T string="Details"#}</h3>
+        <p>
+            <strong>{#_T string="Type:"#}</strong>
+            {#get_class($exception)#}
+        </p>
+        <p>
+            <strong>{#_T string="Code:"#}</strong>
+            {{ exception.getCode() }}
+        </p>
+        <p>
+            <strong>{#_T string="Message:"#}</strong>
+            {{ exception.getMessage() }}
+        </p>
+        <p>
+            <strong>{#_T string="File:"#}</strong>
+            {{ exception.getFile() }}
+        </p>
+        <p>
+            <strong>{#_T string="Line:"#}</strong>
+            {{ exception.getLine() }}
+        </p>
+    </div>
+    <div>
+        <h3>{#_T string="Trace"#}</h3>
+        <pre>{{ exception.getTraceAsString() }}</pre>
+    </div>
+    {% if exception.getPrevious() %}
+        {% import _self as fivehundred %}
+        {{ fivehundred.render_ex(exception.getPrevious()) }}
+    {% endif %}
+{% endmacro %}
+
+{% block content %}
+    <div class="error">
+    <div id="errorbox">
+        <h2>{#{ _T string="Application error" }#}</h2>
+    </div>
+    {% if login.isLogged() and login.isAdmin() and constant('GALETTE_DISPLAY_ERRORS') == 1 or constant('GALETTE_MODE') == 'DEV' %}
+        {% import _self as fivehundred %}
+        {{ fivehundred.render_ex(exception) }}
+    {% endif %}
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'public_page.twig' %}
+
+{% set notitle = true %}
+{% set body_class = "login_page" %}
+{%block content %}
+    {#if isset($smarty.session['slim.flash']['loginfault'])}
+                <div id="errorbox">{$smarty.session['slim.flash']['loginfault']}</div>
+    {/if#}
+    <div class="ui middle aligned center aligned grid" id="loginbox">
+        <div class="column">
+            <form class="ui form" action="{{ path_for("dologin") }}" method="post">
+                <div class="ui stacked segment">
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i><span class="sr-only"><label for="login">{{ _T('Username') }}</label></span>
+                            <input type="text" name="login" id="login" placeholder="{{ _T('Username') }}" autofocus>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="lock icon"></i>
+                            <input type="password" name="password" placeholder="{{ _T('Password') }}">
+                        </div>
+                    </div>
+                    <input type="submit" class="ui primary submit button" value="{{ _T('Login') }}"/>
+                    <input type="hidden" name="ident" value="1" />
+                </div>
+                <div class="ui error message"></div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

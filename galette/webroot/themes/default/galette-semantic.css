@@ -1,0 +1,84 @@
+/*
+ * == Summary
+ *
+ * == Global main styles
+ * == Forms elements
+ * == Header
+ * == Main menu
+ * == Footer
+ * == Main Galette styles
+ * == Public pages
+ * == Mobile devices
+ */
+
+/*
+ * == Global main styles
+ */
+body {
+    background: #636B70 url(images/bg.png) top left no-repeat;
+}
+
+.login_page .column nav {
+    margin-top: 5em;
+}
+
+.ui.input > input::placeholder {
+    color: rgba(0,0,0,.7);
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+a:not(.button) > i {
+    color: rgb(102, 102, 102);
+}
+
+a:not(.button):hover i {
+    color: rgba(0, 0, 0, 1);
+}
+
+/*
+ * == /Global main styles
+ */
+
+
+/*
+ * == Footer
+ */
+footer {
+    text-align: center;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+
+footer ul{
+    margin:0;
+    padding: 0;
+}
+
+footer li {
+    display:inline-block;
+    padding: .1em .2em;
+    margin:0 .2em;
+    color: white;
+}
+
+footer a, footer a:not(.button) > i {
+    color: rgba(255, 255, 255, .7);
+}
+
+footer a:hover, footer a:not(.button):hover > i {
+    color: rgba(255, 255, 255, 1);
+}
+
+#copyright {
+    color: #CCCCCC;
+    font-style: italic;
+}
+
+#copyright:hover {
+    color: rgb(241, 112, 0);
+}
+/* =/ Footer */
+

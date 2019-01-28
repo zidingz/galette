@@ -135,8 +135,8 @@ require GALETTE_ROOT . '/includes/dependencies.php';
 );*/
 
 
-$smarty = $app->getContainer()->get('view')->getSmarty();
-require_once GALETTE_ROOT . 'includes/smarty.inc.php';
+/*$smarty = $app->getContainer()->get('view')->getSmarty();
+require_once GALETTE_ROOT . 'includes/smarty.inc.php';*/
 
 /**
  * Authentication middleware
@@ -275,7 +275,7 @@ $navMiddleware = function ($request, $response, $next) use ($container) {
             }
         }
     }
-    $this->view->getSmarty()->assign('navigate', $navigate);
+    $this->view->getEnvironment()->addGlobal('navigate', $navigate);
 
     return $next($request, $response);
 };
@@ -534,9 +534,9 @@ $app->add(function ($request, $response, $next) {
     $route_info = $request->getAttribute('routeInfo');
 
     if ($route != null) {
-        $this->view->getSmarty()->assign('cur_route', $route->getName());
+        $this->view->getEnvironment()->addGlobal('cur_route', $route->getName());
         if ($route_info != null && is_array($route_info[2])) {
-            $this->view->getSmarty()->assign('cur_subroute', array_shift($route_info[2]));
+            $this->view->getEnvironment()->addGlobal('cur_subroute', array_shift($route_info[2]));
         }
     }
 

@@ -37,7 +37,7 @@
 namespace Galette\Handlers;
 
 use Analog\Analog;
-use Slim\Views\Smarty;
+use Slim\Views\Twig;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
@@ -59,9 +59,9 @@ trait GaletteHandler
     /**
      * Constructor
      *
-     * @param Smarty $view View instance
+     * @param Twig $view View instance
      */
-    public function __construct(Smarty $view)
+    public function __construct(Twig $view)
     {
         $this->view = $view;
     }

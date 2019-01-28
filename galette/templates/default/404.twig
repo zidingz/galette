@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="{{ galette_lang }}" class="public_page{% if additionnal_html_class is defined %} {{additionnal_html_class }}{% endif %}">
+    <head>
+        {% include 'common_header.twig' %}
+    </head>
+    <body>
+        <div class="error">
+            <header>
+                <img src="{path_for name="logo"}" width="{{ logo.getOptimalWidth() }}" height="{{ logo.getOptimalHeight() }}" alt="[ Galette ]" />
+            </header>
+            <div id="errorbox">
+                <h2>{{ _T("Page not found") }}</h2>
+            </div>
+            <p class="center">{{ _T("Sorry, the page you are looking for could not be found.") }}</p>
+            <nav>
+                <a href="{path_for name="slash"}" class="button">
+                    <i class="fas fa-home"></i>
+                    {{ _T("Home") }}
+                </a>
+            </nav>
+        </div>
+
+        {%include 'footer.twig' %}
+    </body>
+</html>

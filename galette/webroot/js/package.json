@@ -1,0 +1,26 @@
+{
+  "name": "galette",
+  "version": "1.0.0",
+  "description": "JS dependencies for Galette project",
+  "main": "common.js",
+  "repository": {
+    "type" : "git",
+    "url" : "git://git.tuxfamily.org/gitroot/galette/galette.git"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/galette/galette.git"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "semantic-ui": "^2.4.2"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Johan Cwiklinski",
+  "license": "GPL-3.0-or-later"
+}

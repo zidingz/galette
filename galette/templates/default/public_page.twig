@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="{{ galette_lang }}" class="public_page{% if additionnal_html_class is defined %} {{ additionnal_html_class }}{% endif %}">
+    <head>
+        {% include 'common_header.twig' %}
+{#% if require_calendar %}
+        <script type="text/javascript" src="{{ base_url }}/{{ jquery_dir }}jquery-ui-{{ jquery_ui_version }}/jquery.ui.datepicker.min.js"></script>
+    {% if galette_lang != 'en' %}
+        <script type="text/javascript" src="{{ base_url }}/{{ jquery_dir }}jquery-ui-{{ jquery_ui_version }}/i18n/jquery.ui.datepicker-{{ galette_lang }}.min.js"></script>
+    {% endif %}
+{% endif %#}
+{% if require_dialog %}
+        {#<script type="text/javascript" src="{{ base_url }}/{{ jquery_dir }}jquery-ui-{{ jquery_ui_version }}/jquery.ui.mouse.min.js"></script>#}
+        {# Drag component, only used for Dialog for the moment #}
+        {#<script type="text/javascript" src="{{ base_url }}/{{ jquery_dir }}jquery-ui-{{ jquery_ui_version }}/jquery.ui.draggable.min.js"></script>#}
+        {# So the dialog could be aligned in the middle of the screen #}
+        {#<script type="text/javascript" src="{{ base_url }}/{{ jquery_dir }}jquery-ui-{{ jquery_ui_version }}/jquery.ui.position.min.js"></script>
+        <script type="text/javascript" src="{{ base_url }}/{{ jquery_dir }}jquery-ui-{{ jquery_ui_version }}/jquery.ui.dialog.min.js"></script>#}
+{% endif %}
+{% if autocomplete %}
+    {#<script type="text/javascript" src="{{ base_url }}/{{ jquery_dir }}jquery-ui-{{ jquery_ui_version }}/jquery.ui.menu.min.js"></script>
+    <script type="text/javascript" src="{{ base_url }}/{{ jquery_dir }}jquery-ui-{{ jquery_ui_version }}/jquery.ui.autocomplete.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+    {% if require_calendar %}
+            $.datepicker.setDefaults($.datepicker.regional['{{ galette_lang }}']);
+        {% if galette_lang != 'en' %}
+                $.datepicker.setDefaults({
+                    dateFormat: 'yy-mm-dd'
+                });
+        {% endif %}
+    {% endif %}
+            $('#ville_adh, #lieu_naissance').autocomplete({
+                source: function (request, response) {
+                    $.post('{path_for name="suggestTown"}', request, response);
+                },
+                minLength: 2
+            });
+            $('#pays_adh').autocomplete({
+                source: function (request, response) {
+                    $.post('{path_for name="suggestCountry"}', request, response);
+                },
+                minLength: 2
+            });
+        });
+    </script>#}
+{% endif %}
+{# If some additionnals headers should be added from plugins, we load the relevant template file
+We have to use a template file, so Smarty will do its work (like replacing variables). #}
+{#if $headers|@count != 0}
+    {foreach from=$headers item=header key=mid}
+        {include file=$header module_id=$mid}
+    {/foreach}
+{/if#}
+{#if $head_redirect}
+    <meta http-equiv="refresh" content="{$head_redirect.timeout};url={$head_redirect.url}" />
+{/if#}
+    </head>
+    <body class="{{ body_class|default('') }}">
+    <div class="ui equal width grid">
+        <div class="ui images column">
+{% for langue in languages %}
+            <a class="ui mini image" href="?pref_lang={{ langue.getID() }}" title="{{_T("Switch locale to '%locale'")|replace({"%locale": langue.getName()}) }}" class="flag">
+                <img src="{{ base_url }}/{{ langue.getFlag() }}" alt="{{ langue.getName() }}" lang="{{ langue.getAbbrev() }}"/>
+            </a>
+{% endfor %}
+        </div>{# /ui images column #}
+        <div class="ten wide column">
+            <header>
+                <img class="bottom aligned tiny image" src="{{ path_for("logo") }}" width="{{ logo.getOptimalWidth() }}" height="{{ logo.getOptimalHeight() }}" alt="[ Galette ]" title="{{ _T('Go back to Galette homepage')}}" />
+    {% if notitle is not defined or notitle is defined and notitle != true %}
+                <h2 class="ui header center">
+                    {{ page_title }}
+                    <span class="sub header"{{ preferences.pref_nom }}{% if preferences.pref_slogan %}&nbsp;: {{ preferences.pref_slogan }}{% endif %}</span>
+                </h2>
+    {% endif %}
+            </header>
+{% if constant('GALETTE_MODE') == 'DEMO' %}
+            <div id="demo" title="{_T string="This application runs under DEMO mode, all features may not be available."}">
+                {{ _T("Demonstration") }}
+            </div>
+{% endif %}
+            <nav class="ui">
+                <a
+                    href="{{ path_for("slash") }}"
+                    class="ui inverted orange basic button{% if cur_route == "slash" or cur_route == 'login' %} selected{% endif %}"
+                >
+                    <i class="fas fa-home"></i>
+                    {{ _T("Home") }}
+                </a>
+        {% if not login.isLogged() %}
+            {% if preferences.pref_bool_selfsubscribe == true %}
+                <a
+                    id="subscribe"
+                    href="{{ path_for("subscribe") }}"
+                    class="ui inverted orange basic button{% if cur_route == "subscribe" %} selected{% endif %}"
+                >
+                    <i class="fas fa-user-graduate" aria-hidden="true"></i>
+                    {{ _T("Subscribe") }}
+                </a>
+            {% endif %}
+            {% if pref_mail_method != constant('Galette\\Core\\GaletteMail::METHOD_DISABLED') %}
+                <a
+                    id="lostpassword"
+                    href="{{ path_for("password-lost") }}"
+                    class="ui inverted orange basic button{% if cur_route == "password-lost" %} selected{% endif %}"
+                >
+                    <i class="fas fa-unlock-alt" aria-hidden="true"></i>
+                    {{ _T("Lost your password?") }}
+                </a>
+            {% endif %}
+        {% endif %}
+        {% if preferences.showPublicPages(login) == true %}
+                <a
+                    href="{{ path_for("publicMembers") }}" title="{{ _T("Members list") }}"
+                    class="ui inverted orange basic button{% if cur_route == "publicMembers" %} selected{% endif %}"
+                >
+                    <i class="fas fa-address-book"></i>
+                    {{ _T("Members list") }}
+                </a>
+                <a
+                    class="ui inverted orange basic button{% if cur_route == "publicTrombinoscope" %} selected{% endif %}"
+                    href="{{ path_for("publicTrombinoscope") }}" title="{{ _T("Trombinoscope") }}"
+                >
+                    <i class="fas fa-user-friends"></i>
+                    {{ _T("Trombinoscope") }}
+                </a>
+                {# Include plugins menu entries #}
+                {#$plugins->getPublicMenus($tpl, true)#}
+        {% endif%}
+            </nav>
+            {% include 'global_messages.twig' %}
+            {% block content %}{{ _T("Public page content") }}{% endblock %}
+        </div>{# /ten wide column #}
+        <div class="column">
+{% if login.isLogged() %}
+            <a id="userlink" class="tooltip" title="{{ _T("View your member card") }}" href="{% if login.isSuperAdmin() %}{{ path_for("slash") }}{% else %}{{ path_for("me") }}{% endif %}">{{ login.loggedInAs(true) }}</a>
+            <a id="logout_10" class="tooltip" href="{% if login.isImpersonated() %}{{ path_for("unimpersonate") }}{% else %}{{ path_for("logout") }}{% endif %}"><i class="fas fa-{% if login.isImpersonated() %}user-secret{% else %}sign-out-alt{% endif %}"></i><span class="sr-only">{{ _T("Log off") }}</span></a>
+{% endif %}
+        </div>{# /column #}
+    </div>
+    {% include 'footer.twig' %}
+    {% block javascripts%}{% endblock %}
+    </body>
+</html>

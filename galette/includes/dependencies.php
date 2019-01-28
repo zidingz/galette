@@ -55,7 +55,7 @@ $container['notFoundHandler'] = function ($c) {
 // -----------------------------------------------------------------------------
 
 // Register Smarty View helper
-$container['view'] = function ($c) {
+/*$container['view'] = function ($c) {
     $view = new \Slim\Views\Smarty(
         rtrim(GALETTE_ROOT . GALETTE_TPL_SUBDIR, DIRECTORY_SEPARATOR),
         [
@@ -109,13 +109,13 @@ $container['view'] = function ($c) {
 
     /*if ($this->parserConfigDir) {
         $instance->setConfigDir($this->parserConfigDir);
-    }*/
+    }*
 
     $smarty->assign('template_subdir', GALETTE_THEME);
     foreach ($c->plugins->getTplAssignments() as $k => $v) {
         $smarty->assign($k, $v);
     }
-    /** galette_lang should be removed and languages used instead */
+    /** galette_lang should be removed and languages used instead *
     $smarty->assign('galette_lang', $c->i18n->getAbbrev());
     $smarty->assign('languages', $c->i18n->getList());
     $smarty->assign('plugins', $c->plugins);
@@ -160,6 +160,97 @@ $container['view'] = function ($c) {
             $module['route']
         );
     }
+    return $view;
+};*/
+
+// Register Twig View helper
+$container['view'] = function ($c) {
+    $view = new \Slim\Views\Twig(
+        rtrim(GALETTE_ROOT . GALETTE_TPL_SUBDIR, DIRECTORY_SEPARATOR),
+        [
+            'cache' => new Twig_Cache_Filesystem(
+                rtrim(GALETTE_CACHE_DIR, DIRECTORY_SEPARATOR),
+                Twig_Cache_Filesystem::FORCE_BYTECODE_INVALIDATION
+            ),
+            'auto_reload'  => true, //FIXME?
+            'srict_variables' => true
+        ]
+    );
+
+    $router = $c->get('router');
+    $uri = \Slim\Http\Uri::createFromEnvironment(new \Slim\Http\Environment($_SERVER));
+    $view->addExtension(new \Slim\Views\TwigExtension($router, $uri));
+    $view->addExtension(new \Galette\TwigExtension\Locales());
+
+    $env = $view->getEnvironment();
+    $env->addGlobal('flash', $c->get('flash'));
+    $env->addGlobal('login', $c->get('login'));
+    $env->addGlobal('logo', $c->get('logo'));
+    /*$smarty->assign('headers', $c->plugins->getTplHeaders());
+    $smarty->assign('plugin_actions', $c->plugins->getTplAdhActions());
+    $smarty->assign(
+        'plugin_batch_actions',
+        $c->plugins->getTplAdhBatchActions()
+    );
+    $smarty->assign(
+        'plugin_detailled_actions',
+        $c->plugins->getTplAdhDetailledActions()
+    );*/
+    $env->addGlobal('scripts_dir', 'js/');
+    $env->addGlobal('jquery_dir', 'js/jquery/');
+    $env->addGlobal('PAGENAME', basename($_SERVER['SCRIPT_NAME']));
+    $env->addGlobal('galette_base_path', './');
+    $env->addGlobal('template_subdir', GALETTE_THEME);
+    /*foreach ($c->plugins->getTplAssignments() as $k => $v) {
+        $smarty->assign($k, $v);
+    }*/
+    /** galette_lang should be removed and languages used instead */
+    $env->addGlobal('galette_lang', $c->i18n->getAbbrev());
+    $env->addGlobal('languages', $c->i18n->getList());
+    $env->addGlobal('plugins', $c->plugins);
+    $env->addGlobal('preferences', $c->preferences);
+    $env->addGlobal('pref_slogan', $c->preferences->pref_slogan);
+    $env->addGlobal('pref_theme', $c->preferences->pref_theme);
+    $env->addGlobal('pref_statut', $c->preferences->pref_statut);
+    $env->addGlobal(
+        'pref_editor_enabled',
+        $c->preferences->pref_editor_enabled
+    );
+    $env->addGlobal('pref_mail_method', $c->preferences->pref_mail_method);
+    $env->addGlobal('existing_mailing', $c->get('session')->mailing !== null);
+    $env->addGlobal('require_tabs', null);
+    $env->addGlobal('contentcls', null);
+    $env->addGlobal('require_cookie', false);
+    $env->addGlobal('additionnal_html_class', null);
+    $env->addGlobal('require_calendar', null);
+    $env->addGlobal('head_redirect', null);
+    $env->addGlobal('error_detected', null);
+    $env->addGlobal('warning_detected', null);
+    $env->addGlobal('success_detected', null);
+    $env->addGlobal('color_picker', null);
+    $env->addGlobal('require_sorter', null);
+    $env->addGlobal('require_dialog', null);
+    $env->addGlobal('require_tree', null);
+    $env->addGlobal('html_editor', null);
+    $env->addGlobal('require_charts', null);
+    $env->addGlobal('require_mass', null);
+
+    if ($c->login->isAdmin() && $c->preferences->pref_telemetry_date) {
+        $now = new \DateTime();
+        $sent = new \DateTime($c->preferences->pref_telemetry_date);
+        $sent->add(new \DateInterval('P1Y'));// ask to resend telemetry after one year
+        if ($now > $sent && !$_COOKIE['renew_telemetry']) {
+            $env->addGlobal('renew_telemetry', true);
+        }
+    }
+
+    /*foreach ($c->get('plugins')->getModules() as $module_id => $module) {
+        $smarty->addTemplateDir(
+            $module['root'] . '/templates/' . $c->get('preferences')->pref_theme,
+            $module['route']
+        );
+    }*/
+
     return $view;
 };
 

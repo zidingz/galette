@@ -286,7 +286,10 @@ function _T($string, $domain = 'galette', $nt = true)
     }
 
     if ($translator->translationExists($string, $domain)) {
-        return $translator->translate($string, $domain);
+        $translated = $translator->translate($string, $domain);
+        //convert nbsp
+        $translated = str_replace('&nbsp;', ' ', $translated);
+        return $translated;
     }
 
     $trans = false;
@@ -304,6 +307,9 @@ function _T($string, $domain = 'galette', $nt = true)
             $trans .= ' (not translated)';
         }
     }
+
+    //convert nbsp
+    $trans = str_replace('&nbsp;', ' ', $trans);
     return $trans;
 }
 

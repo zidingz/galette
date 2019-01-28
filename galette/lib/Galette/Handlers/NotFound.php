@@ -75,7 +75,7 @@ class NotFound extends SlimNotFound
 
             $this->view->render(
                 $response,
-                '404.tpl',
+                '404.twig',
                 [
                     'page_title'    => __('Page not found')
                 ]

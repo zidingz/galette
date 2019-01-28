@@ -78,7 +78,7 @@ class Error extends SlimError
 
             $this->view->render(
                 $response,
-                '500.tpl',
+                '500.twig',
                 [
                     'page_title'    => __('Galette error'),
                     'exception'     => $exception
