@@ -2,30 +2,30 @@
 
 {% macro render_ex(exception) %}
     <div>
-        <h3>{#_T string="Details"#}</h3>
+        <h3>{{ _T("Details") }}</h3>
         <p>
-            <strong>{#_T string="Type:"#}</strong>
+            <strong>{{ _T("Type:") }}</strong>
             {#get_class($exception)#}
         </p>
         <p>
-            <strong>{#_T string="Code:"#}</strong>
+            <strong>{{ _T("Code:") }}</strong>
             {{ exception.getCode() }}
         </p>
         <p>
-            <strong>{#_T string="Message:"#}</strong>
+            <strong>{{ _T("Message:") }}</strong>
             {{ exception.getMessage() }}
         </p>
         <p>
-            <strong>{#_T string="File:"#}</strong>
+            <strong>{{ _T("File:") }}</strong>
             {{ exception.getFile() }}
         </p>
         <p>
-            <strong>{#_T string="Line:"#}</strong>
+            <strong>{{ _T("Line:") }}</strong>
             {{ exception.getLine() }}
         </p>
     </div>
     <div>
-        <h3>{#_T string="Trace"#}</h3>
+        <h3>{{ _T("Trace") }}</h3>
         <pre>{{ exception.getTraceAsString() }}</pre>
     </div>
     {% if exception.getPrevious() %}
@@ -35,14 +35,13 @@
 {% endmacro %}
 
 {% block content %}
-    <div class="error">
-    <div id="errorbox">
-        <h2>{#{ _T string="Application error" }#}</h2>
-    </div>
+    <div class="ui container error">
+        <div class="ui negative message">
+            <h2>{{ _T("Application error") }}</h2>
     {% if login.isLogged() and login.isAdmin() and constant('GALETTE_DISPLAY_ERRORS') == 1 or constant('GALETTE_MODE') == 'DEV' %}
         {% import _self as fivehundred %}
         {{ fivehundred.render_ex(exception) }}
     {% endif %}
-    </div>
+        </div>
     </div>
 {% endblock %}

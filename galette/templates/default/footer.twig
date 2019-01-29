@@ -30,6 +30,9 @@
                 Galette {{ constant('GALETTE_VERSION') }}
             </a>
 {% if login.isLogged() and (login.isAdmin() or login.isStaff()) %}
-            <br/><a id="sysinfos" href="{path_for name="sysinfos"}">{_T string="System informations"}</a>
+            <a id="sysinfos" href="{{ path_for("sysinfos") }}">
+                <i class="fas fa-cogs"></i>
+                {{ _T("System informations") }}
+            </a>
 {% endif %}
         </footer>

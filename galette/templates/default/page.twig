@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="{{ galette_lang }}">
+    <head>
+        {% include 'common_header.twig' %}
+{#
+{if $color_picker}
+        <script type="text/javascript" src="{base_url}/{$jquery_dir}farbtastic.js"></script>
+        <link rel="stylesheet" type="text/css" href="{base_url}/{$template_subdir}farbtastic.css"/>
+{% endif %}
+{* JQuery UI related *}
+{if $require_sorter or $require_dialog}
+        <script type="text/javascript" src="{base_url}/{$jquery_dir}jquery-ui-{$jquery_ui_version}/jquery.ui.mouse.min.js"></script>
+{% endif %}
+{if $require_sorter}
+        <script type="text/javascript" src="{base_url}/{$jquery_dir}jquery-ui-{$jquery_ui_version}/jquery.ui.sortable.min.js"></script>
+{% endif %}
+{if $require_calendar}
+        <script type="text/javascript" src="{base_url}/{$jquery_dir}jquery-ui-{$jquery_ui_version}/jquery.ui.datepicker.min.js"></script>
+    {if $galette_lang ne 'en'}
+        <script type="text/javascript" src="{base_url}/{$jquery_dir}jquery-ui-{$jquery_ui_version}/i18n/jquery.ui.datepicker-{$galette_lang}.min.js"></script>
+    {% endif %}
+{% endif %}
+{if $require_tabs}
+        <script type="text/javascript" src="{base_url}/{$jquery_dir}jquery-ui-{$jquery_ui_version}/jquery.ui.tabs.min.js"></script>
+{% endif %}
+{if $require_dialog}
+        {* Drag component, only used for Dialog for the moment *}
+        <script type="text/javascript" src="{base_url}/{$jquery_dir}jquery-ui-{$jquery_ui_version}/jquery.ui.draggable.min.js"></script>
+        {* So the dialog could be aligned in the middle of the screen *}
+        <script type="text/javascript" src="{base_url}/{$jquery_dir}jquery-ui-{$jquery_ui_version}/jquery.ui.position.min.js"></script>
+        <script type="text/javascript" src="{base_url}/{$jquery_dir}jquery-ui-{$jquery_ui_version}/jquery.ui.dialog.min.js"></script>
+{% endif %}
+{* /JQuery UI related *}
+        <script type="text/javascript" src="{base_url}/{$jquery_dir}jquery.cookie.js"></script>
+{if $require_charts}
+        <link rel="stylesheet" type="text/css" href="{base_url}/{$jquery_dir}jqplot-{$jquery_jqplot_version}/jquery.jqplot.css" />
+        <script type="text/javascript" src="{base_url}/{$jquery_dir}jqplot-{$jquery_jqplot_version}/jquery.jqplot.min.js"></script>
+        <script type="text/javascript" src="{base_url}/{$jquery_dir}jqplot-{$jquery_jqplot_version}/plugins/jqplot.pieRenderer.min.js"></script>
+        <script type="text/javascript" src="{base_url}/{$jquery_dir}jqplot-{$jquery_jqplot_version}/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="{base_url}/{$jquery_dir}jqplot-{$jquery_jqplot_version}/plugins/jqplot.pointLabels.min.js"></script>
+        <script type="text/javascript" src="{base_url}/{$jquery_dir}jqplot-{$jquery_jqplot_version}/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+{% endif %}
+{if $html_editor}
+    {if !isset($plugged_html_editor)}
+        <script type="text/javascript" src="{base_url}/{$jquery_dir}markitup-{$jquery_markitup_version}/jquery.markitup.js"></script>
+        <script type="text/javascript" src="{base_url}/{$jquery_dir}markitup-{$jquery_markitup_version}/sets/html/set-{$galette_lang}.js"></script>
+        <link rel="stylesheet" type="text/css" href="{base_url}/{$jquery_dir}markitup-{$jquery_markitup_version}/skins/galette/style.css" />
+        <link rel="stylesheet" type="text/css" href="{base_url}/{$jquery_dir}markitup-{$jquery_markitup_version}/sets/html/style.css" />
+        <script language="javascript">
+            function toggleMailingEditor(id) {
+                if(!$('#mailing_html').attr('checked')){
+                    $('#mailing_html').attr('checked', true);
+                }
+
+                $('input#html_editor_active').attr('value', '1');
+                {* While it is not possible to deactivate markItUp, we remove completly the functionnality *}
+                $('#toggle_editor').remove();
+                $('#mailing_corps').markItUp(galetteSettings);
+            }
+        {if $html_editor_active eq 1}
+            $(document).ready(function(){
+                {* While it is not possible to deactivate markItUp, we remove completly the functionnality *}
+                $('#toggle_editor').remove();
+                $('#mailing_corps').markItUp(galetteSettings);
+            });
+        {% endif %}
+        </script>
+    {% endif %}
+{% endif %}
+{if $require_tree}
+    <script type="text/javascript" src="{base_url}/{$jquery_dir}jquery.jstree.js"></script>
+{% endif %}
+{if $autocomplete}
+    <script type="text/javascript" src="{base_url}/{$jquery_dir}jquery-ui-{$jquery_ui_version}/jquery.ui.menu.min.js"></script>
+    <script type="text/javascript" src="{base_url}/{$jquery_dir}jquery-ui-{$jquery_ui_version}/jquery.ui.autocomplete.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('#ville_adh, #lieu_naissance').autocomplete({
+                source: function (request, response) {
+                    $.post('{{ path_for("suggestTown"}', request, response);
+                },
+                minLength: 2
+            });
+            $('#pays_adh').autocomplete({
+                source: function (request, response) {
+                    $.post('{{ path_for("suggestCountry"}', request, response);
+                },
+                minLength: 2
+            });
+        });
+    </script>
+{% endif %}
+{if $require_mass}
+    <script type="text/javascript" src="{base_url}/{$scripts_dir}mass_changes.js"></script>
+{% endif %}
+{* If some additionnals headers should be added from plugins, we load the relevant template file
+We have to use a template file, so Smarty will do its work (like replacing variables). *}
+{if $headers|@count != 0}
+    {foreach from=$headers item=header key=mid}
+        {include file=$header module_id=$mid}
+    {/foreach}
+{% endif %}
+{if $head_redirect}
+    <meta http-equiv="refresh" content="{$head_redirect.timeout};url={$head_redirect.url}" />
+{% endif %}#}
+</head>
+<body id="galette_body">
+{% if constant('GALETTE_DISPLAY_ERRORS') is defined and constant('GALETTE_DISPLAY_ERRORS') and constant('GALETTE_MODE') != 'DEV' %}
+        <div class="ui negative message">
+            <p>{{ _T("Galette is configured to display errors. This must be avoided in production environments.") }}</p>
+        </div>
+{% endif %}
+    <div id="menu">
+        <div id="logo">
+            <img src="{{ path_for("logo") }}" width="{{ logo.getOptimalWidth() }}" height="{{ logo.getOptimalHeight() }}" alt="[ Galette ]" />
+        </div>
+{% if login.isSuperAdmin() %}
+        <div id="superadmin" title="{{ _T("You are actually logged-in as superadmin. Some functionnalities may not be available since this is *not* a regular member.") }}">
+            {{ _T("Superadmin") }}
+        </div>
+{% endif %}
+{% if constant('GALETTE_MODE') == 'DEMO' %}
+        <div id="demo" title="{{ _T("This application runs under DEMO mode, all features may not be available.") }}">
+            {{ _T("Demonstration") }}
+        </div>
+{% endif%}
+{% if login.isLogged() %}
+        <h1 class="nojs">{{ _T("Navigation") }}</h1>
+        <ul>
+            <li{% if cur_route == "dashboard" %} class="selected"{% endif %}><a href="{{ path_for("dashboard") }}" title="{{ _T("Go to Galette's dashboard") }}">{{ _T("Dashboard") }}</a></li>
+  {% if login.isAdmin() or login.isStaff() or login.isGroupManager() %}
+            <li{% if cur_route == "members" %} class="selected"{% endif %}><a href="{{ path_for("members") }}" title="{{ _T("View, search into and filter member's list") }}">{{ _T("List of members") }}</a></li>
+            <li{% if cur_route == "advanced-search" %} class="selected"{% endif %}><a href="{{ path_for("advanced-search") }}" title="{{ _T("Perform advanced search into members list") }}">{{ _T("Advanced search") }}</a></li>
+            <li{% if cur_route == "groups" %} class="selected"{% endif %}><a href="{{ path_for("groups") }}" title="{{ _T("View and manage groups") }}">{{ _T("Manage groups") }}</a></li>
+  {% endif %}
+  {% if login.isAdmin() or login.isStaff() %}
+            <li{% if cur_route == "contributions" and cur_subroute == "contributions" %} class="selected"{% endif %}><a href="{{ path_for("contributions", {"type": "contributions"}) }}" title="{{ _T("View and filter contributions") }}">{{ _T("List of contributions") }}</a></li>
+            <li{% if cur_route == "contributions" and cur_subroute == "transactions" %} class="selected"{% endif %}><a href="{{ path_for("contributions", {"type": "transactions"}) }}" title="{{ _T("View and filter transactions") }}">{{ _T("List of transactions") }}</a></li>
+            <li{% if cur_route == "editmember" %} class="selected"{% endif %}><a href="{{ path_for("editmember", {"action": "add"}) }}" title="{{ _T("Add new member in database") }}">{{ _T("Add a member") }}</a></li>
+            <li{% if cur_route == "contribution" and cur_subroute == "fee" %} class="selected"{% endif %}><a href="{{ path_for("contribution", {"type": "fee", "action": "add"}) }}" title="{{ _T("Add new membership fee in database") }}">{{ _T("Add a membership fee") }}</a></li>
+            <li{% if cur_route == "contribution" and cur_subroute == "donation" %} class="selected"{% endif %}><a href="{{ path_for("contribution", {"type": "donation", "action": "add"}) }}" title="{{ _T("Add new donation in database") }}">{{ _T("Add a donation") }}</a></li>
+            <li{% if cur_route == "transaction" %} class="selected"{% endif %}><a href="{{ path_for("transaction", {"action": "add"}) }}" title="{{ _T("Add new transaction in database") }}">{{ _T("Add a transaction") }}</a></li>
+            <li{% if cur_route == "reminders" %} class="selected"{% endif %}><a href="{{ path_for("reminders") }}" title="{{ _T("Send reminders to late members") }}">{{ _T("Reminders") }}</a></li>
+            <li{% if cur_route == "history" %} class="selected"{% endif %}><a href="{{ path_for("history") }}" title="{{ _T("View application's logs") }}">{{ _T("Logs") }}</a></li>
+            <li{% if cur_route == "mailings" %} class="selected"{% endif %}><a href="{{ path_for("mailings") }}" title="{{ _T("Manage mailings that has been sent") }}">{{ _T("Manage mailings") }}</a></li>
+            <li{% if cur_route == "export" %} class="selected"{% endif %}><a href="{{ path_for("export") }}" title="{{ _T("Export some data in various formats") }}">{{ _T("Exports") }}</a></li>
+            <li{% if cur_route == "import" or cur_route == "importModel" %} class="selected"{% endif %}><a href="{{ path_for("import") }}" title="{{ _T("Import members from CSV files") }}">{{ _T("Imports") }}</a></li>
+            <li class="mnu_last{% if cur_route == "charts"%} selected{% endif %}"><a href="{{ path_for("charts") }}" title="{{ _T("Various charts") }}">{{ _T("Charts") }}</a></li>
+  {% else %}
+            <li{% if cur_route == "contributions" and cur_subroute == "contributions" %} class="selected"{% endif %}><a href="{{ path_for("contributions", {"type": "contributions"}) }}" title="{{ _T("View and filter all my contributions") }}">{{ _T("My contributions") }}</a></li>
+            <li{% if cur_route == "contributions" and cur_subroute == "transactions" %} class="selected"{% endif %}><a href="{{ path_for("contributions", {"type": "transactions"}) }}" title="{{ _T("View and filter all my transactions") }}">{{ _T("My transactions") }}</a></li>
+  {% endif %}
+  {% if not login.isSuperAdmin() %}
+            <li{% if cur_route == "me" or cur_route == "member" %} class="selected"{% endif %}><a href="{{ path_for("me") }}" title="{{ _T("View my member card") }}">{{ _T("My information") }}</a></li>
+  {% endif %}
+        </ul>
+{% endif %}
+{% if preferences.showPublicPages(login) == true %}
+        <h1 class="nojs">{{ _T("Public pages") }}</h1>
+        <ul>
+            <li><a href="{{path_for("publicMembers") }}" title="{{ _T("Members list") }}">{{ _T("Members list") }}</a></li>
+            <li><a href="{{path_for("publicTrombinoscope") }}" title="{{ _T("Trombinoscope") }}">{{ _T("Trombinoscope") }}</a></li>
+            {# Include plugins menu entries #}
+            {#$plugins->getPublicMenus($tpl)#}
+        </ul>
+{% endif %}
+{% if login.isAdmin() %}
+        <h1 class="nojs">{{ _T("Configuration") }}</h1>
+        <ul>
+            <li{% if cur_route == "preferences" %} class="selected"{% endif %}><a href="{{ path_for("preferences") }} title="{{ _T("Set applications preferences (address, website, member's cards configuration, ...)") }}>{{ _T("Settings") }}</a></li>
+            <li{% if cur_route == "plugins" %} class="selected"{% endif %}><a href="{{ path_for("plugins") }} title="{{ _T("Informations about available plugins") }}>{{ _T("Plugins") }}</a></li>
+            <li{% if cur_route == "configureCoreFields" %} class="selected"{% endif %}><a href="{{ path_for("configureCoreFields") }} title="{{ _T("Customize fields order, set which are required, and for who they're visibles") }}>{{ _T("Core fields") }}</a></li>
+            <li{% if cur_route == "configureDynamicFields" or cur_route == 'editDynamicField' %} class="selected"{% endif %}><a href="{{ path_for("configureDynamicFields") }} title="{{ _T("Manage additional fields for various forms") }}>{{ _T("Dynamic fields") }}</a></li>
+            <li{% if cur_route == "dynamicTranslations" %} class="selected"{% endif %}><a href="{{ path_for("dynamicTranslations") }} title="{{ _T("Translate additionnals fields labels") }}>{{ _T("Translate labels") }}</a></li>
+            <li{% if cur_route == "entitleds" and cur_subroute == "status" %} class="selected"{% endif %}><a href="{{ path_for("entitleds", {"class": "status"}) }}" title="{{ _T("Manage statuses") }}>{{ _T("Manage statuses") }}</a></li>
+            <li{% if cur_route == "entitleds" and cur_subroute == "contributions-types" %} class="selected"{% endif %}><a href="{{ path_for("entitleds", {"class": "contributions-types"}) }}" title="{{ _T("Manage contributions types") }}>{{ _T("Contributions types") }}</a></li>
+            <li{% if cur_route == "texts" %} class="selected"{% endif %}><a href="{{ path_for("texts") }} title="{{ _T("Manage emails texts and subjects") }}>{{ _T("Emails content") }}</a></li>
+            <li{% if cur_route == "titles" %} class="selected"{% endif %}><a href="{{ path_for("titles") }} title="{{ _T("Manage titles") }}>{{ _T("Titles") }}</a></li>
+            <li{% if cur_route == "pdfModels" %} class="selected"{% endif %}><a href="{{ path_for("pdfModels") }} title="{{ _T("Manage PDF models") }}>{{ _T("PDF models") }}</a></li>
+            <li{% if cur_route == "paymentTypes" %} class="selected"{% endif %}><a href="{{ path_for("paymentTypes") }} title="{{ _T("Manage payment types") }}>{{ _T("Payment types") }}</a></li>
+            <li><a href="{{ path_for("emptyAdhesionForm") }} title="{{ _T("Download empty adhesion form") }}>{{ _T("Empty adhesion form") }}</a></li>
+    {% if login.isSuperAdmin() %}
+            <li{% if cur_route == "fakeData" %} class="selected"{% endif %}><a href="{{ path_for("fakeData") }}">{{ _T("Generate fake data") }}</a></li>
+            <li{% if cur_route == "adminTools" %} class="selected"{% endif %}><a href="{{ path_for("adminTools") }} title="{{ _T("Various administrative tools") }}>{{ _T("Admin tools") }}</a></li>
+    {% endif %}
+        </ul>
+{% endif %}
+
+{# Include plugins menu entries #}
+{#$plugins->getMenus($tpl)#}
+
+{% for langue in languages %}
+            <a class="ui mini image" href="?pref_lang={{ langue.getID() }}" title="{{_T("Switch locale to '%locale'")|replace({"%locale": langue.getName()}) }}" class="flag">
+                <img src="{{ base_url }}/{{ langue.getFlag() }}" alt="{{ langue.getName() }}" lang="{{ langue.getAbbrev() }}"/>
+            </a>
+{% endfor %}
+
+{% if login.isLogged() %}
+        <div>{{ login.loggedInAs() }}</div>
+        <a id="logout_10" class="button" href="{% if login.isImpersonated() %}{{ path_for("unimpersonate") }}{% else %}{{ path_for("logout") }}{% endif %}"><i class="fas fa-{% if login.isImpersonated() %}user-secret{% else %}sign-out-alt{% endif %}"></i>{{ _T("Log off") }}</a>
+{% endif %}
+    </div>
+    <div id="content"{% if contentcls is defined %} class="{{ contentcls }}"{% endif %}>
+        <h1 id="titre">
+            <a href="#galette_body" class="nav-button-open" aria-label="open navigation"></a>
+            <a href="#" class="nav-button-close" aria-label="close navigation"></a>
+            {{ page_title }}
+            {% if cur_route != 'mailing' and existing_mailing == true %}
+                <a
+                    id="recup_mailing"
+                    href="{{ path_for("mailing") }}
+                    class="tooltip"
+                    title="{{ _T("A mailing exists in the current session. Click here if you want to resume or cancel it.") }}
+                >
+                    <i class="fas fa-mail-bulk"></i>
+                    <span class="sr-only">{{ _T("Existing mailing") }}</span>
+                </a>
+            {% endif %}
+        </h1>
+        <p id="asso_name">{{ preferences.pref_nom }}{% if preferences.pref_slogan %}&nbsp;: {{ preferences.pref_slogan }}{% endif %}</p>
+
+        {% include 'global_messages.twig' %}
+        {#$content#}
+        {% block content %}{{ _T("Page content") }}{% endblock %}
+    </div>
+    {% include 'footer.twig' %}
+    {% block javascripts %}{% endblock %}
+        <script type="text/javascript">
+            $(function(){
+    {% if require_calendar %}
+                $.datepicker.setDefaults($.datepicker.regional['{$galette_lang}']);
+        {% if galette_lang == 'en' %}
+                $.datepicker.setDefaults({
+                    dateFormat: 'yy-mm-dd'
+                });
+        {% endif %}
+    {% endif %}
+    {% if renew_telemetry is defined %}
+        {% include 'telemetry.twig' with {part: "jsdialog"} %}
+    {% endif %}
+            });
+        </script>
+</body>
+</html>

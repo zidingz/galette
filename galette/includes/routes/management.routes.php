@@ -99,7 +99,7 @@ $app->get(
         // display page
         $this->view->render(
             $response,
-            'desktop.tpl',
+            'dashboard.twig',
             $params
         );
         return $response;

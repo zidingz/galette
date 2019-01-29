@@ -75,7 +75,7 @@ We have to use a template file, so Smarty will do its work (like replacing varia
     {% endif %}
             </header>
 {% if constant('GALETTE_MODE') == 'DEMO' %}
-            <div id="demo" title="{_T string="This application runs under DEMO mode, all features may not be available."}">
+            <div id="demo" title="{{ _T("This application runs under DEMO mode, all features may not be available.") }}">
                 {{ _T("Demonstration") }}
             </div>
 {% endif %}
