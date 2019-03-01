@@ -509,6 +509,16 @@ class Preferences
     }
 
     /**
+     * Are public pages visibles?
+     *
+     * @return boolean
+     */
+    public function isSelfSubscribeActive()
+    {
+        return (boolean)$this->prefs['pref_bool_selfsubscribe'];
+    }
+
+    /**
      * Global getter method
      *
      * @param string $name name of the property we want to retrive

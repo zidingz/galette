@@ -2,7 +2,7 @@
 
 {% set notitle = true %}
 {% set body_class = "login_page" %}
-{%block content %}
+{% block content %}
     {#if isset($smarty.session['slim.flash']['loginfault'])}
                 <div id="errorbox">{$smarty.session['slim.flash']['loginfault']}</div>
     {/if#}

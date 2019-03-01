@@ -88,7 +88,7 @@ We have to use a template file, so Smarty will do its work (like replacing varia
                     {{ _T("Home") }}
                 </a>
         {% if not login.isLogged() %}
-            {% if preferences.pref_bool_selfsubscribe == true %}
+            {% if preferences.isSelfSubscribeActive() %}
                 <a
                     id="subscribe"
                     href="{{ path_for("subscribe") }}"
@@ -129,6 +129,12 @@ We have to use a template file, so Smarty will do its work (like replacing varia
         {% endif%}
             </nav>
             {% include 'global_messages.twig' %}
+
+                <h2 class="ui header center">
+                    {{ page_title }}
+                    <span class="sub header"{{ preferences.pref_nom }}{% if preferences.pref_slogan %}&nbsp;: {{ preferences.pref_slogan }}{% endif %}</span>
+                </h2>
+
             {% block content %}{{ _T("Public page content") }}{% endblock %}
         </div>{# /ten wide column #}
         <div class="column">

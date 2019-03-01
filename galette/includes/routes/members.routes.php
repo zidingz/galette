@@ -98,10 +98,10 @@ $app->get(
         // display page
         $this->view->render(
             $response,
-            'member.tpl',
+            'member.twig',
             array(
                 'page_title'        => _T("Subscription"),
-                'parent_tpl'        => 'public_page.tpl',
+                'parent_tpl'        => 'public_page',
                 'member'            => $member,
                 'self_adh'          => true,
                 'languages'         => $this->i18n->getList(),
