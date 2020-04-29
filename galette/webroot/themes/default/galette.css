@@ -135,8 +135,11 @@ abbr[title] {
     cursor: help;
 }
 
-th, cation {
+th, caption {
     text-align: left;
+}
+th:dir(rtl) {
+    text-align: right;
 }
 
 p#required {
@@ -185,7 +188,7 @@ select.lang option {
  */
  nav {
      margin: .3em 0 .5em;
-     text-align: center;
+     /*text-align: center;*/
 }
 
 nav a{
@@ -202,7 +205,7 @@ nav a{
     margin:0 0 0.5em 0.4em;
     padding:0 .2em;
     width:16em;
-    text-align: center;
+    /*text-align: center;*/
     -moz-border-radius: 10px 10px 10px 10px;
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
@@ -211,7 +214,7 @@ nav a{
 #menu h1 {
     font-size:1em;
     cursor:pointer;
-    text-align:left;
+    /*text-align:left;*/
     margin:0;
 }
 /* .nojs class will be removed at runtime by a js script */
@@ -225,7 +228,7 @@ nav a{
 #menu ul {
     list-style-type: none;
     padding: 0px;
-    text-align:left;
+    /*text-align:left;*/
     overflow:hidden; /*a:active under firefox makes a overflow*/
 }
 
@@ -264,7 +267,7 @@ nav a{
 
 #desktop, #share {
     border-spacing:3em 1em;
-    text-align: center;
+    /*text-align: center;*/
 }
 
 #share {
@@ -276,7 +279,7 @@ nav a{
 }
 
 #news > div {
-    text-align: left;
+    /*text-align: left;*/
 }
 
 #news p {
@@ -287,7 +290,7 @@ nav a{
     -webkit-hyphens: auto;
     -moz-hyphens: auto;
     hyphens: auto;
-    text-align: justify;
+    /*text-align: justify;*/
 }
 
 .desktop, .panels {
@@ -345,7 +348,7 @@ nav a{
     background-repeat: no-repeat, repeat-x;
     display: inline-block;
     width: 100px;
-    text-align: center;
+    /*text-align: center;*/
     vertical-align: bottom;
     padding: 60px .2em .2em;
     margin: 1em;
@@ -448,7 +451,7 @@ nav a{
  * == Footer
  */
 footer {
-    text-align: center;
+    /*text-align: center;*/
     padding-top: 10px;
     margin-bottom: 10px;
 }
@@ -477,14 +480,14 @@ footer a:hover {
 
 /* == Main Galette styles */
 #asso_name {
-    text-align: center;
+    /*text-align: center;*/
     margin: .5em auto 1em;
     font-weight: bold;
     font-size: 1.1em;
 }
 
 #listfilter {
-    text-align: center;
+    /*text-align: center;*/
     background-color: #DDDDFF;
     padding: 10px;
     margin:0 1em 1em 1em;
@@ -496,7 +499,7 @@ footer a:hover {
 .selectize-control {
     display: inline-block;
     min-width: 10em;
-    text-align: left;
+    /*text-align: left;*/
 }
 
 
@@ -546,7 +549,7 @@ footer a:hover {
     border:none;
     font-weight:normal;
     padding-left:20px;
-    text-align:left;
+    /*text-align:left;*/
 }
 
 .selection_menu .exemple {
@@ -569,7 +572,7 @@ footer a:hover {
     left: 0;
     right: 0;
     margin: 0;
-    text-align: center;
+    /*text-align: center;*/
     background-color:rgba(0, 0, 0, 0.5);
     z-index: 100000;
 }
@@ -831,7 +834,7 @@ legend .tab-button {
     padding-top:30px!important;
     padding-left: 0!important;
     display: block;
-    text-align: center;
+    /*text-align: center;*/
 }
 .bigbutton i {
     display: block;
@@ -876,15 +879,15 @@ legend .tab-button {
 }
 
 .left {
-    text-align: left!important;
+    /*text-align: left!important;*/
 }
 
 .right {
-    text-align: right!important;
+    /*text-align: right!important;*/
 }
 
 .center {
-    text-align: center!important;
+    /*text-align: center!important;*/
 }
 
 .center_table {
@@ -941,7 +944,7 @@ legend .tab-button {
 }
 
 #transaction_detail thead td {
-    text-align: center;
+    /*text-align: center;*/
     font-style: italic;
     background-color: transparent;
 }
@@ -1006,12 +1009,12 @@ legend .tab-button {
 #selected_groups {
     min-width: 25em!important;
     margin-left:.5em!important;
-    text-align: center;
+    /*text-align: center;*/
 }
 
 #selected_members ul,
 #selected_groups ul {
-    text-align: left;
+    /*text-align: left;*/
     list-style-type: none;
     cursor: pointer;
     overflow: auto;
@@ -1040,7 +1043,7 @@ legend .tab-button {
 
 .texts_legend .back > span {
     font-size: .9em;
-    text-align: right;
+    /*text-align: right;*/
     display: block;
     color:#666;
 }
@@ -1060,7 +1063,7 @@ legend .tab-button {
 }
 
 .public_page header {
-     text-align: center;
+     /*text-align: center;*/
      margin-top:1em;
 }
 
@@ -1076,7 +1079,7 @@ legend .tab-button {
 }
 
 .public_page section {
-    text-align: center;
+    /*text-align: center;*/
 }
 
 .public_page table {
@@ -1084,7 +1087,7 @@ legend .tab-button {
 }
 
 .public_page form {
-    text-align: center;
+    /*text-align: center;*/
 }
 
 .public_page .exemple {
@@ -1115,7 +1118,7 @@ legend .tab-button {
 
 nav#plang_selector {
     background: #fff;
-    text-align: left;
+    /*text-align: left;*/
     z-index: 100;
 }
 
@@ -1175,7 +1178,7 @@ nav#plang_selector.onhover:hover > ul {
 #plugin_install footer {
     margin:.5em 0 0;
     padding: .1em .5em;
-    text-align: center;
+    /*text-align: center;*/
     font-size: 0.85em;
     border: 1px rgba(255, 255, 255, 0.5) solid;
     -moz-border-radius: 10px 10px 10px 10px;
@@ -1209,7 +1212,7 @@ nav#plang_selector.onhover:hover > ul {
 }
 
 #btn_box{
-    text-align: right;
+    /*text-align: right;*/
     margin:0;
 }
 
@@ -1222,7 +1225,7 @@ nav#plang_selector.onhover:hover > ul {
 #plugin_install h2{
     margin: .5em 0 0;
     font-size:1.2em;
-    text-align: center;
+    /*text-align: center;*/
 }
 
 #installation_mode {
@@ -1245,7 +1248,7 @@ nav#plang_selector.onhover:hover > ul {
     font-size: 1.1em;
     margin: .2em 0 0;
     color: #666666;
-    text-align: center;
+    /*text-align: center;*//
 }
 
 #plugin_install ul {
@@ -1320,7 +1323,7 @@ input.submit:hover
     background-color:#DDDDFF;
     margin:0 1em 0em 1em;
     color: #666;
-    text-align:center;
+    /*text-align:center;*/
     position:relative;
     -moz-border-radius: 10px 10px 10px 10px;
     -webkit-border-radius: 10px 10px 10px 10px;
@@ -1332,7 +1335,7 @@ input.submit:hover
 
 .titre {
     font-size:1.3em;
-    text-align: center;
+    /*text-align: center;*/
     font-weight: bold;
     border-style: solid;
     border-width: 1px;
@@ -1346,7 +1349,7 @@ input.submit:hover
 
 .soustitre {
     font-size:1.2em;
-    text-align: left;
+    /*text-align: left;*/
     font-weight: bold;
     border-style: solid;
     border-width: 1px;
@@ -1413,7 +1416,7 @@ a.listing:hover {
 
 .emptylist {
     background-color: #EEEEEE;
-    text-align: center;
+    /*text-align: center;*/
     font-style: italic;
 }
 
@@ -1439,13 +1442,13 @@ a.listing:hover {
 }
 
 #logo {
-    text-align: center;
+    /*text-align: center;*/
     font-weight: bold;
     margin: 0.5em 0;
 }
 
 #main_logo{
-    text-align: center;
+    /*text-align: center;*/
     margin-top:0.5em;
 }
 
@@ -1480,7 +1483,7 @@ a.listing:hover {
 }
 
 #logout {
-    text-align: center;
+    /*text-align: center;*/
     margin:0 0 .7em;
 }
 
@@ -1500,11 +1503,11 @@ a.listing:hover {
     font-size:1em;
     background-color: #CDCDFF;
     padding-left: 0.2em;
-    text-align: left;
+    /*text-align: left;*/
 }
 
 #legende th{
-    text-align:center;
+    /*text-align:center;*/
     width:18px;
 }
 #legende td, #legende th {
@@ -1596,7 +1599,7 @@ table.listing.single {
 #groups_list header,
 #group_infos header {
     padding: .2em 0;
-    text-align: center;
+    /*text-align: center;*/
     font-weight: bold;
     border: 0;
 }
@@ -1625,11 +1628,11 @@ table.listing.single {
     display: table-cell;
     padding: .5em;
     vertical-align: middle;
-    text-align: right;
+    /*text-align: right;*/
 }
 
 .mailing_infos p:nth-child(2){
-    text-align: left;
+    /*text-align: left;*/
 }
 
 #mailing_objet, #mailing_corps{
@@ -1639,7 +1642,7 @@ table.listing.single {
 .ajax_mailing_preview header {
     padding:.2em 0;
     font-weight: bold!important;
-    text-align: center;
+    /*text-align: center;*/
 }
 
 #mailing_header dt,
@@ -1669,7 +1672,7 @@ table.listing.single {
 }
 
 #errorbox, .errorbox {
-    text-align:center;
+    /*text-align:center;*/
     color:black;
     border : 2px solid #c00;
     padding : 0.5em 0.5em 0.5em 40px;
@@ -1692,7 +1695,7 @@ table.listing.single {
 }
 
 #warningbox, .warningbox {
-    text-align:center;
+    /*text-align:center;*/
     color:black;
     padding : 0.5em 0.5em 0.5em 40px;
     background : white url(images/warning.png) no-repeat 5px 50%;
@@ -1716,7 +1719,7 @@ table.listing.single {
 }
 
 #infobox, #successbox, #renewbox {
-    text-align:center;
+    /*text-align:center;*/
     color:black;
     border : 2px solid #04CC65;
     padding : 0.5em 0.5em 0.5em 40px;
@@ -1755,13 +1758,13 @@ table.listing.single {
 
 #input-table .libelle {
     font-size: 11px;
-    text-align: left;
+    /*text-align: left;*/
     background-color: #DDDDFF;
     font-weight: normal;
 }
 
 #input-table .header {
-    text-align: left;
+    /*text-align: left;*/
     font-weight: bold;
 }
 
@@ -1814,12 +1817,12 @@ td img, a img {
 
 .button-container
 {
-    text-align: center;
+    /*text-align: center;*/
 }
 
 .bigtable
 {
-    text-align: center;
+    /*text-align: center;*/
 }
 .bigtable table
 {
@@ -1830,7 +1833,7 @@ td img, a img {
 .bigtable th
 {
     font-weight: normal;
-    text-align: left;
+    /*text-align: left;*/
     vertical-align: top;
     background-color: #DDDDFF;
     padding: 0px 5px 0px 5px;
@@ -1839,14 +1842,14 @@ td img, a img {
 {
     background-color: #EEEEEE;
     padding: 0px 5px 0px 5px;
-    text-align: left;
+    /*text-align: left;*/
 }
 .bigtable .separator
 {
     padding:.3em 0 .1em;
     background-color: #FFFFFF;
     font-weight: bold;
-    text-align: center;
+    /*text-align: center;*/
 }
 .bigtable .subtitle
 {
@@ -1865,7 +1868,7 @@ td img, a img {
 fieldset{
     border: 1px solid #BBBBBB;
     margin:0 1em 1em;
-    text-align:left;
+    /*text-align:left;*/
     position:relative;
     padding:.5em;
 }
@@ -1963,7 +1966,7 @@ th.bline, td.bline{
     padding:0.1em 0.3em;
     margin-bottom:0;
     display:block;
-    text-align:left;
+    /*text-align:left;*/
 }
 
 .cssform .bline, .galette_form label, .galette_form .bline {
@@ -2013,7 +2016,7 @@ label.simplelabel {
 .menu{
     margin:0.7em 0 0 0;
     padding:0;
-    text-align:right;
+    /*text-align:right;*/
     font-weight:bold;
 }
 .menu li{
@@ -2080,7 +2083,7 @@ td.photo img{
 
 #details_menu{
     padding:0;
-    text-align:center;
+    /*text-align:center;*/
     list-style-type: none;
     width: 85%;
     margin: 0 auto;
@@ -2124,7 +2127,7 @@ td.photo img{
 .tabbed legend, .tabbed h3 {
     border: none;
     margin: 0;
-    text-align: center;
+    /*text-align: center;*/
     font-size: 1.2em;
 }
 
@@ -2173,7 +2176,7 @@ label:hover > i, span.bline:hover > i {
     padding-bottom:.2em;
     display: inline-block;
     vertical-align: top;
-    text-align:center;
+    /*text-align:center;*/
     width:240px;
     height:240px;
     -moz-border-radius: 10px 10px 10px 10px;
@@ -2186,7 +2189,7 @@ label:hover > i, span.bline:hover > i {
 }
 
 .trombinoscope {
-    text-align: center;
+    /*text-align: center;*/
 }
 
 .tbl_line_even,
@@ -2240,7 +2243,7 @@ label:hover > i, span.bline:hover > i {
 .fields_list span.yesno{
     margin-right:.2em;
     display:inline-block;
-    text-align:center;
+    /*text-align:center;*/
     width: 18%;
 }
 .fields_list span.access{
@@ -2248,7 +2251,7 @@ label:hover > i, span.bline:hover > i {
     min-width:25em;
     width:33%;
     display:inline-block;
-    text-align:center;
+    /*text-align:center;*/
 }
 
 .fields_list .selectize-input {
@@ -2286,7 +2289,7 @@ label:hover > i, span.bline:hover > i {
     font-weight:bold;
 }
 .pages{
-    text-align:center;
+    /*text-align:center;*/
     margin:.2em 0 0 0;
     padding:0;
 }
@@ -2316,7 +2319,7 @@ label:hover > i, span.bline:hover > i {
     /*position: absolute;
     top: 0;*/
     background-color: red;
-    text-align: center;
+    /*text-align: center;*/
     font-weight: bold;
 }
 
@@ -2329,7 +2332,7 @@ label:hover > i, span.bline:hover > i {
     width: 85%;
     padding: .1em 0;
     border-radius: 6px;
-    text-align: center;
+    /*text-align: center;*/
 }
 
 .warnings {
@@ -2422,7 +2425,7 @@ meter[value="4"]::-moz-meter-bar { background: green ; }
     }
 
     .menu {
-      text-align:center;
+      /*text-align:center;*/
     }
 
     #main_logo {
@@ -2545,7 +2548,7 @@ meter[value="4"]::-moz-meter-bar { background: green ; }
     table.listing td {
         display: block;
         padding: 0;
-        text-align: left;
+        /*text-align: left;*/
         white-space: normal;
     }
 
@@ -2580,7 +2583,7 @@ meter[value="4"]::-moz-meter-bar { background: green ; }
         margin-top: .3em;
         padding: .5em .2em;
         vertical-align: middle;
-        text-align: left;
+        /*text-align: left;*/
     }
 
     table.listing td[data-scope="row"] a {
@@ -2599,7 +2602,7 @@ meter[value="4"]::-moz-meter-bar { background: green ; }
     }
 
     table.listing td.center {
-        text-align: left!important;
+        /*text-align: left!important;*/
     }
 
     span[data-title]:before,
@@ -2620,7 +2623,7 @@ meter[value="4"]::-moz-meter-bar { background: green ; }
     }
 
     table.listing td.actions_row {
-        text-align: center!important;
+        /*text-align: center!important;*/
     }
 
     table.listing .row-title {
@@ -2639,7 +2642,7 @@ meter[value="4"]::-moz-meter-bar { background: green ; }
     .tbl_line_odd span.yesnoadmin {
         display: block;
         width: auto;
-        text-align: left;
+        /*text-align: left;*/
     }
 
     #renewbox {

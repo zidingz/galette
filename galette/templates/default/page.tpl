@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{$galette_lang}">
+<html lang="{$galette_lang}" dir="rtl">
     <head>
         {include file='common_header.tpl'}
 {* If some additionnals headers should be added from plugins, we load the relevant template file
