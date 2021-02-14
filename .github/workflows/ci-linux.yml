@@ -109,7 +109,7 @@ jobs:
           --health-retries 5
 
       mysql:
-        image: mariadb
+        image: mariadb:10.5
         env:
           MYSQL_USER: galette_tests
           MYSQL_PASSWORD: g@l3tte
