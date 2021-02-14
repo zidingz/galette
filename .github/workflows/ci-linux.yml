@@ -16,9 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - {php-version: "7.3"} # Lint on lower PHP version to detected too early usage of new syntaxes
-          - {php-version: "8.0"} # Lint on higher PHP version to detected deprecated elements usage
+        php-versions: [ '7.4', '8.0' ]
 
     steps:
       - name: PHP
@@ -63,12 +61,12 @@ jobs:
       - name: Install checker
         working-directory: galette
         run: composer require maglnet/composer-require-checker
-        if: ${{ matrix.php-versions == '7.3' }}
+        if: ${{ matrix.php-versions == '7.4' }}
 
       - name: Check missing symbols
         run: |
           galette/vendor/bin/composer-require-checker check --config-file=.composer-require-checker.config.json galette/composer.json
-        if: ${{ matrix.php-versions == '7.3' }}
+        if: ${{ matrix.php-versions == '7.4' }}
 
   tests:
     runs-on: ubuntu-latest
@@ -95,7 +93,7 @@ jobs:
       # Label used to access the service container
       pgsql:
         # Docker Hub image
-        image: postgres:${{  matrix.pg-versions }}
+        image: postgres
         # Provide the password for postgres
         env:
           POSTGRES_USER: galette_tests
