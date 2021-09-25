@@ -1,6 +1,6 @@
 diff -up vendor/slim/slim/Slim/Collection.php.patch vendor/slim/slim/Slim/Collection.php
 --- vendor/slim/slim/Slim/Collection.php.patch	2021-09-25 10:36:44.113669838 +0200
-+++ vendor/slim/slim/Slim/Collection.php	2021-09-25 10:38:24.452768448 +0200
++++ vendor/slim/slim/Slim/Collection.php	2021-09-25 11:15:07.874167274 +0200
 @@ -109,7 +109,7 @@ class Collection implements CollectionIn
       *
       * @return bool
@@ -10,16 +10,15 @@ diff -up vendor/slim/slim/Slim/Collection.php.patch vendor/slim/slim/Slim/Collec
      {
          return $this->has($key);
      }
-@@ -121,7 +121,7 @@ class Collection implements CollectionIn
+@@ -121,6 +121,7 @@ class Collection implements CollectionIn
       *
       * @return mixed The key's value, or the default value
       */
--    public function offsetGet($key)
-+    public function offsetGet($key): mixed
++    #[\ReturnTypeWillChange]
+     public function offsetGet($key)
      {
          return $this->get($key);
-     }
-@@ -132,7 +132,7 @@ class Collection implements CollectionIn
+@@ -132,7 +133,7 @@ class Collection implements CollectionIn
       * @param string $key   The data key
       * @param mixed  $value The data value
       */
@@ -28,7 +27,7 @@ diff -up vendor/slim/slim/Slim/Collection.php.patch vendor/slim/slim/Slim/Collec
      {
          $this->set($key, $value);
      }
-@@ -142,7 +142,7 @@ class Collection implements CollectionIn
+@@ -142,7 +143,7 @@ class Collection implements CollectionIn
       *
       * @param string $key The data key
       */
@@ -37,7 +36,7 @@ diff -up vendor/slim/slim/Slim/Collection.php.patch vendor/slim/slim/Slim/Collec
      {
          $this->remove($key);
      }
-@@ -152,7 +152,7 @@ class Collection implements CollectionIn
+@@ -152,7 +153,7 @@ class Collection implements CollectionIn
       *
       * @return int
       */
@@ -46,7 +45,7 @@ diff -up vendor/slim/slim/Slim/Collection.php.patch vendor/slim/slim/Slim/Collec
      {
          return count($this->data);
      }
-@@ -162,7 +162,7 @@ class Collection implements CollectionIn
+@@ -162,7 +163,7 @@ class Collection implements CollectionIn
       *
       * @return ArrayIterator
       */
